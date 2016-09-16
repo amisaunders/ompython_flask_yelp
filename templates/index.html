@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
+	</head>
+	<body>
+		<div class="jumbotron">
+			<div class="container">
+				{% if forecast %}
+					<h1>{{ forecast }}</h1>
+					<a href="{{ url_for('index') }}">Look up another address</a>
+				{% else %}
+					<h1>Hello! Where do you live?</h1>
+					<form action="/" class="form-inline">
+						<div class="form-group">
+							<input type="text" name="address" placeholder="City, State" class="form-control">
+						</div>
+						<input type="submit" value="Submit" class="btn btn-primary">
+					</form>
+				{% endif %}
+				<p>This site suggests the top 3 eateries in your area</p>
+				<p><a href="{{ url_for('about') }}">About this project</a></p>
+			</div>
+		</div>
+		<div class="container">
+			{% if top %}
+				<h2>{{ top[0][0] }}</h2>
+				<p>
+				Rating:  {{ top[0][1] }}<br>
+				Phone:  {{ top[0][2][0:3] }}-{{ top[0][2][3:6] }}-{{ top[0][2][6:10] }}
+				</p>
+				<h2>{{ top[1][0] }}</h2>
+				<p>
+				Rating:  {{ top[1][1] }}<br>
+				Phone:  {{ top[1][2][0:3] }}-{{ top[1][2][3:6] }}-{{ top[1][2][6:10] }}
+				</p>
+				<h2>{{ top[2][0] }}</h2>
+				<p>
+				Rating:  {{ top[2][1] }}<br>
+				Phone:  {{ top[2][2][0:3] }}-{{ top[2][2][3:6] }}-{{ top[2][2][6:10] }}
+				</p>				
+			{% else %}
+				<p></p>
+			{% endif %}
+		</div>
+
+	</body>
+</html>
